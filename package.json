@@ -1,0 +1,118 @@
+{
+  "name": "function-navigator",
+  "displayName": "Function Navigator",
+  "description": "Generate code file function lists for easy navigation",
+  "author": "Ron Edmeades",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.102.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/function-navigator.git"
+  },
+  "homepage": "https://github.com/yourusername/function-navigator",
+  "bugs": {
+    "url": "https://github.com/yourusername/function-navigator/issues"
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "function-navigator",
+          "title": "Functions",
+          "icon": "$(symbol-method)"
+        }
+      ]
+    },
+    "views": {
+      "function-navigator": [
+        {
+          "icon": "$(symbol-method)",
+          "id": "functionList",
+          "name": "Functions"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "function-navigator.toggleFocusOff",
+          "when": "view == functionList && !functionNavigator.focusMode",
+          "group": "navigation"
+        },
+        {
+          "command": "function-navigator.toggleFocusOn",
+          "when": "view == functionList && functionNavigator.focusMode",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "function-navigator.addToFocus",
+          "when": "view == functionList && viewItem == function",
+          "group": "focus"
+        },
+        {
+          "command": "function-navigator.removeFromFocus", 
+          "when": "view == functionList && viewItem == function",
+          "group": "focus"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "function-navigator.addCurrentToFocus",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "function-navigator.toggleFocusOff",
+        "title": "Enable Focus",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "function-navigator.toggleFocusOn", 
+        "title": "Disable Focus",
+        "icon": "$(filter-filled)"
+      },
+      {
+        "command": "function-navigator.addToFocus",
+        "title": "Add to Focus"
+      },
+      {
+        "command": "function-navigator.removeFromFocus",
+        "title": "Remove from Focus"
+      },
+      {
+        "command": "function-navigator.addCurrentToFocus",
+        "title": "Add to Focus List"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.102.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
