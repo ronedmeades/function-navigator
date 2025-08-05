@@ -420,7 +420,8 @@ class FunctionProvider implements vscode.TreeDataProvider<vscode.DocumentSymbol>
 		if (this.focusMode) {
 			return this.focusList.length > 0 ? this.focusList : [];
 		} else {
-			return allFunctions;
+			// return allFunctions;
+            return allFunctions.sort((a, b) => a.range.start.line - b.range.start.line);
 		}
 	}
 }
