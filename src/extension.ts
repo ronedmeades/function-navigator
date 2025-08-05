@@ -118,7 +118,7 @@ class FunctionProvider implements vscode.TreeDataProvider<vscode.DocumentSymbol>
             const line = editor.document.lineAt(currentLineIndex).text.trim();
             
             // Skip decorators that start with @
-            if (!line.startsWith('@')) {
+            if (!line.startsWith('@') && !line.startsWith('//')) {
                 functionLine = line;
                 break;
             }
